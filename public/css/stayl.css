@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'BYekan';
+  src: url('/public/fonts/BYekan.ttf');
+
+  font-weight: normal;
+  font-style: normal;
+  } 
+
+
+  body{
+    font-family:"BYekan";
+    text-decoration: right;
+    direction: rtl;
+
+  }
+  .card{
+    direction: rtl;
+    text-align:right;
+    font-family:"BYekan";
+    font-size:14px;
+    background-color: #fdfdfd;
+    border: none;
+  }
+  .form-control{
+    box-shadow: 1px;
+    border:none;
+    border-radius: 8px;
+    border-bottom: 1px solid #74747474;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+  .card-header{
+    border-radius: 8px;
+    font-style: bold;
+    color: white;
+    background-color:#03192ed8;
+    border-bottom: 1px solid #bebebe;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+.btn{
+  background-color:#0d4a85;
+  padding:8px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}

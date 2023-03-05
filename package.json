@@ -1,0 +1,19 @@
+{
+  "name": "zawa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoos": "0.0.1-security",
+    "mongoose": "^7.0.0",
+    "yup": "^1.0.2"
+  }
+}
