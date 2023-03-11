@@ -7,7 +7,7 @@ const uri = 'mongodb://127.0.0.1:27017/zawa';
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(uri, {
+        const conn = await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useFindAndModify: true,

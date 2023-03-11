@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/stayl.css">
+    <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
+        <link rel="stylesheet" href="/css/font-awesome.css" />
+    <title>Home</title>
+</head>
+<body class="">
+
+    <div class="banner mb-1">
+
+
+      
+       <div class="bgbanner"></div>
+       <div class="centered">ZAWA</div>
+      <img class="bannerimag" src="/1.jpg" alt="barber" >
+
+    </div>
+   
+    <a class=" mx-auto btn btn-danger text-center canselnobat  container"  href="/nobat/cansel">لغو نوبت</a>
+
+    <hr>
+
+    <% if(message.length > 0) { %>
+        <div class="alert alert-success alert-dismissible fade show rtl" role="alert">
+            <%= message %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <% } %> 
+
+        
+    <% if(error.length > 0) { %>
+        <div class="alert alert-warning alert-dismissible fade show rtl" role="alert">
+            <%= error %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <% } %> 
+
+
+
+
+
+
+
+
+
+
+    <% for(let nobat of nobats){ %>
+
+        <div class="cardvew row mx-auto">
+
+       <div class="cardinto "> <p>نوبت قابل رزرو</p></div>
+    
+       <div class="alert alert-info  col-sm text-center">تاریخ : <%= nobat.date %></div>
+       <div class="col-sm alert alert-info text-center">ساعت مراجعه : <%= nobat.saat %></div>
+        <a href="/sabtnobat/<%= nobat._id %>"class="btn btn-success ">دریافت نوبت</a>
+    </div>
+        </div>
+
+   
+
+
+        <% } %>
+
+        <!-- Remove the container if you want to extend the Footer to full width. -->
+<div class="container my-5">
+<hr>
+    <footer class="text-center text-white" style="background-color: #fdfdfd;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+  
+        <!-- Instagram -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fa fa-instagram"></i
+        ></a>
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="#!"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fa fa-telegram"></i
+        ></a>
+  
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+
+    <!-- Copyright -->
+  </footer>
+    
+  </div>
+  <!-- End of .container -->
+
+
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/jquery.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

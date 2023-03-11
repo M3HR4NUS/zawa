@@ -1,10 +1,21 @@
-const User=require('../models/user')
 
-exports.getRegister= (req,res)=>{
+const Nobat=require('../models/nobat');
+
+const R=require('../models/rezerv');
+
+
+
+exports.home= async(req,res)=>{
   try {
+
+    const nobats=await Nobat.find({status:1});
+    const message=req.flash('msgsecss');
+    const error=req.flash('error');
     
-    res.render('register.ejs',{
-      pagetitle:"ثبت حساب کاربری",
+    res.render('home',{
+      pageTitle:"دریافت نوبت",
+      nobats,
+      message,error
     });
 
   } catch (err) {
@@ -12,28 +23,25 @@ exports.getRegister= (req,res)=>{
   }
 }
 
-exports.postLogin=async(req,res)=>{
+exports.sabtnobat=async(req,res,)=>{
+  const nobat=await Nobat.findOne({_id:req.params.id });
+  const error=req.flash('error')
+  res.render('register',{
+     pageTitle:"ثبت نوبت",
+     nobat,
+     error
+  })
+ 
+}
+
+exports.rezerv=async(req,res)=>{
   const errors=[];
   try {
+    const {saat,date}=req.body;
 
-    const {username,number,password,configpassword}=req.body;
-    const user=await User.findOne({number});
-    if(!number.length == 11){
-          errors.push({message:"شماره تماس را صحیح  وارد کنید"})
-      
-       res.render('register.ejs',{
-        pagetitle:"ثبت حساب کاربری",
-        errors,
-      });
-    }
-       
-    if(!user){
-
-      await User.create({username,number,password});
-      await User.save();
-      res.redirect('/homepage');
-    }
-     return res.redirect('/user/login');
+     await Nobat.create({saat,date,status:1});
+     res.redirect("/dashbord/zawa")
+           
     
   } catch (err) {
     console.log(err);
@@ -45,10 +53,133 @@ exports.postLogin=async(req,res)=>{
     });
 
     return res.render('register.ejs',{
-      pagetitle:"ثبت حساب کاربری",
-      errors,
+      pageTitle:"دریافت نوبت",
+      // errors,
     });
 
   
   }
+}
+
+
+exports.dashbord=(req,res)=>{
+  res.render("dashbord-add",{
+    pageTitle:"داشبورد || مدیریت",
+  })
+}
+
+exports.showcansel=(req,res)=>{
+  res.render('canselpage',{
+    pageTitle:"لغو نوبت"
+  })
+}
+
+exports.canseln=async(req,res)=>{
+    try {
+             const {number,nump}=req.body;
+          const user=await R.findOne({number,nump});
+          
+          if(!user){
+            req.flash("error","شما دارای نوبت در سامانه نمیباشید");
+            return res.redirect("/home")
+          }
+          if(user.status==3){
+            req.flash("error","شما دارای نوبت در سامانه نمیباشید");
+            return res.redirect("/home")
+
+          }
+          user.status=3;
+          await user.save();
+          req.flash("msgsecss","نوبت شما با موفقیت لغو شد");
+          res.redirect("/home")
+      
+    } catch (err) {
+      console.log(err);
+    }
+}
+
+
+
+exports.secsesnobat=async(req,res)=>{
+  const {fname,lname,number}=req.body;
+  const nobat=await Nobat.findOne({_id:req.params.id});
+  const {saat,date}=nobat;
+  const status=2;
+   const nump= parseInt(Math.random() * 9000 + 1000);
+   
+  try {
+
+    await R.create({fname,lname,number,saat,date,status,nump});
+ 
+    nobat.status = status || 2;
+    
+    await nobat.save();
+    req.flash("msgsecss", `
+    جناب آقای ${fname} ${lname} 
+    نوبت شما با شماره پیگیری  <<   ${nump}  >>  در سامانه رزرو شد
+    -تاریخ رزرو شده : ${date} 
+    -ساعت : ${saat}
+
+
+         -----شماره پیگیری جهت مراجعه یا در صورت درخواست لغو نوبت حفظ شود ------
+    `);
+    return res.redirect('/home')
+
+
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+
+
+
+exports.getdashboard=async(req,res)=>{
+
+
+  try {
+    const nobats=await Nobat.find({status:1});
+    const nobatr= await R.find({});
+
+    
+
+   
+ 
+    res.render("dashbord-add",{
+      pageTitle:"ثبت نوبت",
+      nobats,
+      nobatr,
+
+    })
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+exports.getlogin=(req,res)=>{
+  res.render("login",{
+    pageTitle : "ورود"
+  })
+}
+
+exports.logindash=(req,res)=>{
+  const {username,password}=req.body;
+  if(username== "mohammadM" && password == "13747474"){
+    return res.redirect('/dashbord/zawa');
+  }
+  res.redirect('/login/admin')
+}
+
+exports.deleteN= async(req,res)=>{
+
+  try {
+
+    await Nobat.findByIdAndRemove(req.params.id);
+    return res.redirect('/dashbord/zawa');
+    
+  } catch (err) {
+    console.log(err);
+  }
+
 }

@@ -1,48 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Login Page1</title>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رزرو نوبت</title>
+  <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="/css/register.css">
   <link rel="stylesheet" href="/css/stayl.css">
+  <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
+  <link rel="stylesheet" href="/css/font-awesome.css" />
 </head>
-<body class="rtl">
-	<div class="container mt-5">
-		<div class="row justify-content-center">
-			<div class="col-md-6 col-lg-4">
-				<div class="card">
-					<div class="card-header">
-						<h4 class="text-center">ZAWA</h4>
-					</div>
-					<div class="card-body">
-						<form action="/user/register" method="POST">
-							<div class="mb-3">
-								<label for="username" class="form-label">نام کاربری</label>
-								<input type="text" name="username" class="form-control" id="username" required>
-							</div>
-							<div class="mb-3">
-								<label for="number" class="form-label">شماره همراه</label>
-								<input type="number" name="number" class="form-control" id="number" required placeholder=" ___ ____ ___ ___ 09">
-							</div>
-							<div class="mb-3">
-								<label for="password" class="form-label">رمز عبور</label>
-								<input type="password" name="password" class="form-control" id="number" required placeholder="*** *** ***">
-							</div>
-              <div class="mb-3">
-								<label for="password" class="form-label"> تکرار رمز عبور</label>
-								<input type="password" name="configpassword" class="form-control" id="number" required placeholder="*** *** ***">
-							</div>
-							<button type="submit" class="btn btn-primary w-100  mt-5">ثبت نام</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- Bootstrap JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<body dir="rtl">
+  <div class="container">
+    <div class="row mt-5">
+    
+      <div class="d-flex justify-content-center mt-5">
+        <div class="card border border-0 shadow-sm rounded bg-light" style="width: 24rem;">
+          <div class="card-body">
+            <h5 class="card-title text-center h2"> ZAWA</h5>
+
+            <% if(error.length > 0) { %>
+              <div class="alert alert-warning alert-dismissible fade show rtl" role="alert">
+                  <%= error %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              
+              <% } %> 
+            <h6 class="card-subtitle mt-5 mb-3 text-muted">رزرو نوبت آرایشگاه</h6>
+            <form class="m-2" action="/sabtnobat/secsses/<%= nobat._id %>" method="POST">
+              <div class="mb-2">
+                <label for="exampleInputEmail1" class="form-label">نام </label>
+                <input type="text" name="fname" class="form-control" >
+              </div>
+              <div class="mb-2">
+                <label for="exampleInputPassword1" class="form-label">نام خانوادگی</label>
+                <input type="text" name="lname" class="form-control" >
+              </div>
+              <div class="mb-2">
+                <label for="exampleInputPassword1" class="form-label">شماره تلفن</label>
+                <input type="tel" name="number" class="form-control" placeholder="09-- --- -- --" >
+              </div>
+              <button type="submit" class="btn btn-success w-100 mt-4">رزرو نوبت</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="/js/bootstrap.bundle.min.js"></script>  
+
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/js/jquery.slim.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</body>
 </body>
 </html>
