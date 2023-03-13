@@ -1,12 +1,13 @@
 const {Router}=require('express');
 
 
-const {home,sabtnobat,secsesnobat,getdashboard,rezerv,logindash,getlogin,deleteN,showcansel,canseln}=require('../controllers/userController')
+const {home,sabtnobat,secsesnobat,getdashboard,rezerv,logindash,getlogin,deleteN,showcansel,canseln,homefilter}=require('../controllers/userController')
 
 const router= new Router();
 
 //!home
 router.get("/home",home);
+router.post("/home/date",homefilter);
 router.get("/sabtnobat/:id",sabtnobat)
 router.post("/sabtnobat/secsses/:id",secsesnobat);
 router.get("/home/getcode",secsesnobat);

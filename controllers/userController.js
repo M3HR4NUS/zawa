@@ -8,14 +8,66 @@ const R=require('../models/rezerv');
 exports.home= async(req,res)=>{
   try {
 
+
+
+    let today = new Date().toLocaleDateString('fa-IR');
+    const day=today.split('/')[2];
+    const math=today.split('/')[1];
+    const yaer=today.split('/')[0];
+
+
     const nobats=await Nobat.find({status:1});
     const message=req.flash('msgsecss');
     const error=req.flash('error');
-    
+    const datef='';
+   
+   
     res.render('home',{
       pageTitle:"دریافت نوبت",
+
+      day,
+      math,
+      yaer,
       nobats,
-      message,error
+      message,
+      error,
+      today,
+      datef
+    });
+
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+exports.homefilter= async(req,res)=>{
+  try {
+
+
+
+    const {datef}=req.body;
+    let today = new Date().toLocaleDateString('fa-IR');
+    const day=today.split('/')[2];
+    const math=today.split('/')[1];
+    const yaer=today.split('/')[0];
+
+  
+
+
+    const nobats=await Nobat.find({date:datef,status:1});
+    const message=req.flash('msgsecss');
+    const error=req.flash('error');
+   
+    res.render('home',{
+      pageTitle:"دریافت نوبت",
+      day,
+      math,
+      yaer,
+      nobats,
+      message,
+      error,
+      today,
+      datef,
     });
 
   } catch (err) {
@@ -75,9 +127,15 @@ exports.showcansel=(req,res)=>{
 }
 
 exports.canseln=async(req,res)=>{
+  const errors=[];
     try {
+      
              const {number,nump}=req.body;
           const user=await R.findOne({number,nump});
+          // const saat=user.saat;
+          // const date=user.date || "1";
+          console.log(user);
+          
           
           if(!user){
             req.flash("error","شما دارای نوبت در سامانه نمیباشید");
@@ -87,15 +145,26 @@ exports.canseln=async(req,res)=>{
             req.flash("error","شما دارای نوبت در سامانه نمیباشید");
             return res.redirect("/home")
 
-          }
+          };
+          const n=await Nobat.findOne({saat:user.saat,date:user.date});
+          n.status=1;
+          await n.save();
+
           user.status=3;
           await user.save();
+          
           req.flash("msgsecss","نوبت شما با موفقیت لغو شد");
           res.redirect("/home")
       
     } catch (err) {
       console.log(err);
-    }
+      err.inner.forEach((e) => {
+        errors.push({
+            name: e.path,
+            message: e.message,
+        });
+    });
+  }
 }
 
 

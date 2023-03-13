@@ -17,12 +17,15 @@
 
 
   body{
-    background-color:#f7f7f7;
+    background-color:#f6f6f6;
     font-family:"irans" !important;
     text-decoration: right;
     direction: rtl;
-    font-size: 14px !important;
+    font-size: 13px !important;
 
+  }
+  .backgrand{
+    background-color: #fcfcfc;
   }
   .card{
     direction: rtl;
@@ -71,19 +74,21 @@
   font-family: "BYekan";
   font-size: 16px;
   margin-right: auto;
-  padding:10px;
+  padding:12px;
   background-color:#fdfdfd;
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
-  border: 1px solid #78787845;
+  /* border: 1px solid #78787845; */
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 .cardinto{
   border-bottom:1px solid #c2c2c2;
   color:#2c2c2c;
-  font-family: "BYekan";
+  font-family: "irans";
+  font-size:13px;
   text-align: center;
   direction:rtl;
 }
@@ -164,4 +169,45 @@
 }
 td{
   padding: 10px
+}
+.btnhome{
+  border: 1px solid #78787845;
+  padding: 4px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+
+  background-color:#f1f1f1
+}
+.borderd{
+  border-bottom: 1px solid #cdcdcd;
+  padding: 10px;
+  font-family: 'irans';
+  font-size: 13px;
+  display: block;
+  margin-bottom:8px;
+  display: block;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  
+}
+
+.btnok{
+  margin-top: 6px;
+  list-style: none;
+  background-color:#fd9f13 !important;
+  color:#fff !important;
+  font-family:"irans" !important;
+  font-size: 12px  !important;
+  border-radius: 8px!important;
+  -webkit-border-radius: 8px!important;
+  -moz-border-radius: 8px!important;
+  -ms-border-radius: 8px!important;
+  -o-border-radius: 8px!important;
+  padding: 8px 18px;
 }
