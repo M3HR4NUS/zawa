@@ -1,7 +1,7 @@
 const {Router}=require('express');
 
 
-const {home,sabtnobat,secsesnobat,getdashboard,rezerv,logindash,getlogin,deleteN,showcansel,canseln,homefilter}=require('../controllers/userController')
+const {home,sabtnobat,secsesnobat,getdashboard,rezerv,logindash,getlogin,deleteN,showcansel,canseln,homefilter,deleteNo}=require('../controllers/userController')
 
 const router= new Router();
 
@@ -16,6 +16,7 @@ router.get("/home/getcode",secsesnobat);
 
 
 router.get("/nobat/delete/:id",deleteN);
+router.get("/delete/nob/:id",deleteNo);
 
 
 

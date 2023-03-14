@@ -16,7 +16,7 @@ exports.home= async(req,res)=>{
     const yaer=today.split('/')[0];
 
 
-    const nobats=await Nobat.find({status:1});
+    const nobats=await Nobat.find({status:1}).sort({saat:'asc'});
     const message=req.flash('msgsecss');
     const error=req.flash('error');
     const datef='';
@@ -24,7 +24,6 @@ exports.home= async(req,res)=>{
    
     res.render('home',{
       pageTitle:"دریافت نوبت",
-
       day,
       math,
       yaer,
@@ -77,11 +76,11 @@ exports.homefilter= async(req,res)=>{
 
 exports.sabtnobat=async(req,res,)=>{
   const nobat=await Nobat.findOne({_id:req.params.id });
-  const error=req.flash('error')
+  const errors=req.flash('error')
   res.render('register',{
      pageTitle:"ثبت نوبت",
      nobat,
-     error
+     errors
   })
  
 }
@@ -170,6 +169,7 @@ exports.canseln=async(req,res)=>{
 
 
 exports.secsesnobat=async(req,res)=>{
+  const errors=[];
   const {fname,lname,number}=req.body;
   const nobat=await Nobat.findOne({_id:req.params.id});
   const {saat,date}=nobat;
@@ -178,6 +178,8 @@ exports.secsesnobat=async(req,res)=>{
    
   try {
 
+    await R.userValidation(req.body);
+    
     await R.create({fname,lname,number,saat,date,status,nump});
  
     nobat.status = status || 2;
@@ -198,6 +200,21 @@ exports.secsesnobat=async(req,res)=>{
 
   } catch (err) {
     console.log(err);
+    err.inner.forEach((e) => {
+      errors.push({
+          name: e.path,
+          message: e.message,
+      });
+  });
+  const nobat=await Nobat.findOne({_id:req.params.id });
+  res.render('register',{
+     pageTitle:"ثبت نوبت",
+     nobat,
+     errors,
+  })
+
+
+
   }
 }
 
@@ -206,19 +223,23 @@ exports.secsesnobat=async(req,res)=>{
 
 exports.getdashboard=async(req,res)=>{
 
+  
+  let today = new Date().toLocaleDateString('fa-IR');
+  const day=today.split('/')[2];
+  const math=today.split('/')[1];
+  const yaer=today.split('/')[0];
 
   try {
     const nobats=await Nobat.find({status:1});
     const nobatr= await R.find({});
 
-    
-
-   
- 
     res.render("dashbord-add",{
       pageTitle:"ثبت نوبت",
       nobats,
       nobatr,
+      day,
+      math,
+      yaer,
 
     })
   } catch (err) {
@@ -245,6 +266,20 @@ exports.deleteN= async(req,res)=>{
   try {
 
     await Nobat.findByIdAndRemove(req.params.id);
+    return res.redirect('/dashbord/zawa');
+    
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+
+
+exports.deleteNo= async(req,res)=>{
+
+  try {
+
+    await R.findByIdAndRemove(req.params.id);
     return res.redirect('/dashbord/zawa');
     
   } catch (err) {

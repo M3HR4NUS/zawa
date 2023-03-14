@@ -1,8 +1,4 @@
 
-const uri = 'mongodb://127.0.0.1:27017/zawa';
-
-
-
   const mongoose = require("mongoose");
 
 const connectDB = async () => {

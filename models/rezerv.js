@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-
+const{schema}=require('./secret/yupuser')
 
 const rezscema=new mongoose.Schema({
   saat:{
@@ -45,7 +45,12 @@ const rezscema=new mongoose.Schema({
   },
 
 
+
 })
+
+rezscema.statics.userValidation = function (body) {
+  return schema.validate(body, { abortEarly: false });
+};
 rezscema.index({ number: "text" });
 
 module.exports = mongoose.model("Rezerv",rezscema);

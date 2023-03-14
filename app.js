@@ -33,6 +33,7 @@ app.use(express.static('public'))
 
 //!router
 app.use("/",require('./routers/user'))
+app.use(require("./controllers/errorc").get404);
 
 app.listen(process.env.PORT,()=>{
   console.log("start");
