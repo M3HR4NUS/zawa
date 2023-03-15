@@ -35,6 +35,14 @@
               </div>
               <% }) %> <% } %>
             <h6 class="card-subtitle mt-5 mb-3 text-muted" style="font-family: 'irans';">رزرو نوبت آرایشگاه</h6>
+            <div class="row mx-2 mb-1">
+
+
+              <div class=" alert alert-info  col-sm " style="font-size: 12px ; font-family: 'irans';">تاریخ : <%= nobat.date %> &nbsp;
+                  ساعت  : <%= nobat.saat %>
+              </div>
+
+            </div>
             <form class="m-2" action="/sabtnobat/secsses/<%= nobat._id %>" method="POST">
               <div class="mb-2">
                 <label for="exampleInputEmail1" class="form-label"> </label>

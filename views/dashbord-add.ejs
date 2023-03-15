@@ -51,18 +51,35 @@
 
           <form action="/dashbord/zawa" method="POST">
             <div class="row mx-auto">
-              <div class="col-12 col-lg-6 col-md-6">
+              <div class="col-12 col-lg-3 col-md-3">
                 <div class="mb-3">
 
                   <label for="exampleInputEmail1" class="form-label">تاریخ</label>
-                  <input type="text" name="date" class="w-100 form-control" id="persianDatapicker">
+                  <input type="text" required name="date" class="w-100 form-control" id="persianDatapicker">
 
                 </div>
               </div>
-              <div class="col-12 col-lg-6 col-md-6">
+
+
+              <div class="col-12 col-lg-3 col-md-3">
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">ساعت </label>
-                  <input type="time" name="saat" class="form-control" id="">
+                  <label for="exampleInputPassword1" class="form-label">ساعت شروع </label>
+                  <input type="time" required name="saatstart" class="form-control" id="">
+                </div>
+              </div>
+
+
+              <div class="col-12 col-lg-3 col-md-3">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label"> ساعت پایان</label>
+                  <input type="time" required name="saatend" class="form-control" id="">
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-3 col-md-3">
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">میزان وقت (دقیقه) </label>
+                  <input type="number" required name="nummin" class="form-control" id="">
                 </div>
               </div>
 

@@ -218,9 +218,10 @@ td{
 }
 .inputrol{
   border: none !important;
-  font-family: 'BYken' !important;
+  font-family: 'irans' !important;
   direction: rtl;
-  font-size:14px !important;
+  padding:4px;
+  font-size:12px !important;
   border-radius:6px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.085);
   -webkit-border-radius:6px;

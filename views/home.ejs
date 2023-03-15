@@ -66,7 +66,7 @@
               <form action="/home/date" method="POST">
                 <label for="exampleInputEmail1" class="form-label">فیلتر بر اساس تاریخ</label>
                 <input type="text" name="datef" class="w-100 form-control text-center" id="persianDatapicker">
-                <input type="submit" class="btn btn-info mt-2 " value="اعمال فیلتر">
+                <input type="submit" class="btn btn-info mt-2 "  style="font-size: 12px ;"  value="اعمال فیلتر">
               </form>
             </span>
 
@@ -98,28 +98,69 @@
               <% } %>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                 <% if(nobats.length>0){
                   for(let nobat of nobats){ 
                     
          
                     const datt=nobat.date.split('/'); const dayy=datt[2]; const mthh=datt[1];
-                  const
-                  yarr=datt[0]; if(dayy>= day && math == mthh && yaer == yarr  ){
+                  const yarr=datt[0];
+                  const hu=nobat.saat.split(":");
+                  if(dayy>= day && math == mthh && yaer == yarr  ){
                   %>
 
 
+               <% if(time >= hu[0] && day == dayy) {%>
+
+                <% if(time == hu[0] && mint <= hu[1]) {%>
+
+
+
+
+                  <div class="cardvew  mx-auto">
+
+                  <div class="cardinto  rtl">
+                  <p>نوبت قابل رزرو</p>
+                  </div>
+
+
+                  <div class="row mx-2 mb-2">
+
+
+                  <div class=" borderd  col-sm text-center">تاریخ : <%= nobat.date %>
+                  </div>
+                  <div class="col-sm borderd text-center">ساعت مراجعه : <%= nobat.saat %>
+                  </div>
+
+                  </div>
+                  <a href="/sabtnobat/<%= nobat._id %>" class=" btnok">دریافت نوبت</a>
+                  </div>
+
+
+
+
+                  <%}else{  %>
+
+                  <div class="cardvew  mx-auto table-active">
+
+                    <div class="cardinto  rtl">
+                      <p>نوبت غیرقابل رزرو</p>
+                    </div>
+
+
+                    <div class="row mx-2 mb-2">
+                     
+
+                    <div class=" borderd  col-sm text-center">تاریخ : <%= nobat.date %>
+                    </div>
+                    <div class="col-sm borderd text-center">ساعت مراجعه : <%= nobat.saat %>
+                    </div>
+
+                  </div>
+                    
+                  </div>
+
+
+                   <% }}else {  %>
 
 
                   <div class="cardvew  mx-auto">
@@ -144,6 +185,10 @@
 
 
 
+                    <%} %>
+
+
+
 
                   <%} } }else {  %>
                     <div class="cardvew row mx-auto">
@@ -159,13 +204,13 @@
                    <% }%>
 
                     <!-- Remove the container if you want to extend the Footer to full width. -->
-                    <div class=" my-5">
-                      <hr>
+                    <div class=" my-2 mt-5">
+                    <div class="w-100 "  style="border-top: 1px solid #78787845 ;"></div>
                       <footer class="text-center text-white" style="background-color: #fdfdfd;">
                         <!-- Grid container -->
-                        <div class="container pt-4">
+                        <div class="container pt-1">
                           <!-- Section: Social media -->
-                          <section class="mb-4">
+                          <section class="mb-2">
 
                             <!-- Instagram -->
                             <a class="btn btn-link btn-floating btn-lg text-dark m-1"
@@ -180,7 +225,7 @@
                         </div>
                         <!-- Grid container -->
 
-                        Copyright
+         
 
                         <!-- Copyright -->
                       </footer>

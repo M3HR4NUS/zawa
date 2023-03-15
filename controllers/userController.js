@@ -14,12 +14,20 @@ exports.home= async(req,res)=>{
     const day=today.split('/')[2];
     const math=today.split('/')[1];
     const yaer=today.split('/')[0];
+    const time=new Date().getHours();
+    const mint=new Date().getMinutes();
 
 
-    const nobats=await Nobat.find({status:1}).sort({saat:'asc'});
+    const nobats=await Nobat.find({status:1}).sort({date : 'ascending',saat:'ascending'})
+
+
+
+
+    // console.log(nob);
     const message=req.flash('msgsecss');
     const error=req.flash('error');
     const datef='';
+   
    
    
     res.render('home',{
@@ -31,7 +39,10 @@ exports.home= async(req,res)=>{
       message,
       error,
       today,
-      datef
+      datef,
+      time,
+      mint,
+   
     });
 
   } catch (err) {
@@ -49,11 +60,11 @@ exports.homefilter= async(req,res)=>{
     const day=today.split('/')[2];
     const math=today.split('/')[1];
     const yaer=today.split('/')[0];
+    const time=new Date().getHours();
 
-  
 
 
-    const nobats=await Nobat.find({date:datef,status:1});
+    const nobats=await Nobat.find({date:datef,status:1}).sort({saat:'ascending',date:'ascending'});
     const message=req.flash('msgsecss');
     const error=req.flash('error');
    
@@ -67,6 +78,7 @@ exports.homefilter= async(req,res)=>{
       error,
       today,
       datef,
+   time,
     });
 
   } catch (err) {
@@ -87,10 +99,61 @@ exports.sabtnobat=async(req,res,)=>{
 
 exports.rezerv=async(req,res)=>{
   const errors=[];
-  try {
-    const {saat,date}=req.body;
 
-     await Nobat.create({saat,date,status:1});
+  try {
+    const {saatstart,saatend,date,nummin}=req.body;
+    let saats=saatstart.split(":")[0]*1;
+    let mins=saatstart.split(":")[1]*1;
+    let saate=saatend.split(":")[0]*1;
+    let mine=saatend.split(":")[1]*1;
+   
+
+
+     const num= parseInt(nummin);
+
+
+    do{
+
+
+ 
+
+       if(saats.toString().length == 1){
+
+
+        if(mins.toString().length == 1){
+          let saat=`0${saats}:0${mins}`;
+          await Nobat.create({saat,date,status:1});
+        }else{
+          let saat=`0${saats}:${mins}`;
+          await Nobat.create({saat,date,status:1});
+        }
+
+       }else{
+
+           
+                    if(mins.toString().length == 1){
+                      let saat=`${saats}:0${mins}`;
+                      await Nobat.create({saat,date,status:1});
+                    }else{
+                      let saat=`${saats}:${mins}`;
+                      await Nobat.create({saat,date,status:1});
+                    }
+          }          
+                    let mm= mins*1;
+                      mins+=num;
+                      if(mins > 59){
+                        saats+=1;
+                        mm=60 - mm;
+                        let m=num-mm;
+                        mins=m;
+                    
+                  }
+                
+      }while(saats <= saate );
+  
+
+
+     
      res.redirect("/dashbord/zawa")
            
     
